@@ -1,0 +1,74 @@
+{
+    "macros": [
+        "CELLULAR_DEVICE=QUECTEL_BG96",
+        "MDMTXD=D1",
+        "MDMRXD=D0",
+        "MDMRTS=D12",
+        "MDMCTS=A1"
+    ],
+    "target_overrides": {
+        "*": {
+            "target.components_remove"                  : ["FLASHIAP"],
+            "platform.stdio-baud-rate"                  : 115200,
+            "platform.stdio-convert-newlines"           : true,
+            "platform.default-serial-baud-rate"         : 115200,
+            "platform.stdio-buffered-serial"            : true
+        },
+	"NRF52840_DK": {
+            "target.network-default-interface-type" : "CELLULAR",
+	        "target.components_add"             : ["SPIF"],
+            "lwip.ipv4-enabled"                 : true,
+            "lwip.ethernet-enabled"             : false,
+            "lwip.ppp-enabled"                  : true,
+            "lwip.tcp-enabled"                  : true,
+            "platform.error-filename-capture-enabled": null,
+            "platform.error-all-threads-info"   : null,
+            "mbed-trace.enable"                 : null,
+            "device-management.flash-start-address"               : "0x00000000",
+            "device-management.flash-size"                        : "(1024*1024)",
+            "device-management.sotp-section-1-address"            : "(MBED_CONF_APP_FLASH_START_ADDRESS + MBED_CONF_APP_FLASH_SIZE - 2*(4*1024))",
+            "device-management.sotp-section-1-size"               : "(4*1024)",
+            "device-management.sotp-section-2-address"            : "(MBED_CONF_APP_FLASH_START_ADDRESS + MBED_CONF_APP_FLASH_SIZE - 1*(4*1024))",
+            "device-management.sotp-section-2-size"               : "(4*1024)",
+            "device-management.sotp-num-sections"                 : 2,
+            "target.header_offset"              : "0x2c000",
+            "target.app_offset"                 : "0x2c400",
+            "update-client.application-details" : "0x2c000",
+            "update-client.storage-address"     : "(1*1024*1024)",
+            "update-client.storage-size"        : "(1*1024*1024)",
+            "update-client.storage-locations"   : 1,
+            "events.shared-stacksize"           : 2048,
+            "target.features_remove"            : ["CRYPTOCELL310"],
+            "target.macros_remove"              : ["MBEDTLS_CONFIG_HW_SUPPORT"],
+            "target.features_add"               : ["BOOTLOADER"],
+            "target.bootloader_img"             : "bootloader/mbed-bootloader-NRF52840_DK.hex",
+            "target.device_has_add"             : ["STDIO_MESSAGES"],
+      	    "nsapi.default-cellular-apn": "\"vzwinternet\"",
+      	    "nsapi.default-cellular-password": null,
+      	    "nsapi.default-cellular-sim-pin": "\"1234\"",
+      	    "nsapi.default-cellular-username": null
+        }
+    },
+    "config": {
+        "format-storage-layer-on-error": {
+            "help": "Whether to format the storage layer when it cannot be read - always disable for production devices!",
+            "value": 1
+        },
+        "main-stack-size": {
+            "value": 6000
+        },
+        "use-button": {
+            "help": "Whether the target has a button",
+            "macro_name": "USE_BUTTON",
+            "value": true
+        },
+        "button-pressed-state": {
+            "help": "Value of the button when pressed",
+            "value": 0
+        },
+        "no_led": {
+            "help": "This flag disables the heartbeat thread in tests. This is useful for platforms that don't have an LED or the LED is used for other functionality like LED on the SPI clockline etc",
+            "value": null
+        }
+    }
+}
