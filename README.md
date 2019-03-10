@@ -31,45 +31,26 @@ The RESET and PWRKey signals are used to bring the BG96 up during system startup
     mbed config -G CLOUD_SDK_API_KEY <your-api-key>
     ```
 
-3. Create the device management update certificate:
+3. Create the device management and update certificates:
 
     ```
     mbed dm init -d "company.com" --model-name "product-model" -q --force
     ```
 
-4. Compile and program:
+4. Set the apn for your SIM card/operator in `mbed_app.json`:
+    ```
+    "nsapi.default-cellular-apn": "\"YOUR_APN\"",
+    ```
+
+5. Compile and program(-f):
 
     ```
-    mbed compile -t GCC_ARM -m NRF52840_DK
+    mbed compile -t GCC_ARM -m NRF52840_DK -f
     ```
 
 #### Firmware update
 
-Follow these steps to generate a manifest, compile and perform a firmware update of your device:
-
-1. Configure the API key for your Pelion account.
-
-     If you don't have an API key available, then login in [Pelion IoT Platform portal](https://portal.mbedcloud.com/), navigate to 'Access Management', 'API keys' and create a new one. Then specify the API key as global `mbed` configuration:
-
-    ```
-    mbed config -G CLOUD_SDK_API_KEY <your-api-key>
-    ```
-
-2. Initialize the device management feature:
-
-    ```
-    mbed dm init -d "company.com" --model-name "product-model" -q --force
-    ```
-
-3. Compile the application, include the firware update credentials generated before, merge with the bootloader and program the device:
-
-    ```
-    mbed compile -t GCC_ARM -m NRF52840_DK -c
-    ```
-
-4. Open a serial terminal, verify the application boots and is able to register to the Device Management service. Write down the `<endpoint ID>`, as it's required to identify the device to perform a firmware update.
-
-5. Update the firmware of the device through Mbed CLI:
+Assuming your API key was added to your env (Step 2) and the device management credentials were created properly in the project root(Step 3), the following command will generate a manifest, compile and perform a firmware update of your device via Pelion:
 
     ```
     mbed dm update device -D <Pelion device ID> -t GCC_ARM -m NRF52840_DK
