@@ -56,7 +56,7 @@ Assuming your API key was added to your env (Step 2) and the device management c
     mbed dm update device -D <Pelion device ID> -t GCC_ARM -m NRF52840_DK
     ```
 
-    Inspect the logs on the device to see the update progress. It should look similar to:
+Inspect the logs on the device to see the update progress. It should look similar to:
 
     ```
     Firmware download requested
@@ -64,4 +64,4 @@ Assuming your API key was added to your env (Step 2) and the device management c
     Downloading: [+++- ] 6 %
     ```
 
-    When the download completes, the firmware is verified. If everything is OK, the firmware update is applied, the device reboots and attemps to connect to the Device Management service again. The `<endpoint ID>` should be preserved.
+When the download completes, the firmware is verified. If everything is OK, the firmware update is applied, the device reboots and attemps to connect to the Device Management service again. The `<endpoint ID>` should be preserved.
