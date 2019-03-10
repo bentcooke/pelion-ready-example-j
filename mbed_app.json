@@ -7,23 +7,21 @@
         "MDMCTS=A1"
     ],
     "target_overrides": {
-        "*": {
-            "target.components_remove"                  : ["FLASHIAP"],
-            "platform.stdio-baud-rate"                  : 115200,
-            "platform.stdio-convert-newlines"           : true,
-            "platform.default-serial-baud-rate"         : 115200,
-            "platform.stdio-buffered-serial"            : true
-        },
 	"NRF52840_DK": {
+            "mbed-trace.enable"                     : null,
+            "target.components_remove"              : ["FLASHIAP"],
+            "platform.stdio-baud-rate"              : 115200,
+            "platform.stdio-convert-newlines"       : true,
+            "platform.default-serial-baud-rate"     : 115200,
+            "platform.stdio-buffered-serial"        : true,
             "target.network-default-interface-type" : "CELLULAR",
-	        "target.components_add"             : ["SPIF"],
+	    "target.components_add"             : ["SPIF"],
             "lwip.ipv4-enabled"                 : true,
             "lwip.ethernet-enabled"             : false,
             "lwip.ppp-enabled"                  : true,
             "lwip.tcp-enabled"                  : true,
             "platform.error-filename-capture-enabled": null,
-            "platform.error-all-threads-info"   : null,
-            "mbed-trace.enable"                 : null,
+            "platform.error-all-threads-info"        : null,
             "device-management.flash-start-address"               : "0x00000000",
             "device-management.flash-size"                        : "(1024*1024)",
             "device-management.sotp-section-1-address"            : "(MBED_CONF_APP_FLASH_START_ADDRESS + MBED_CONF_APP_FLASH_SIZE - 2*(4*1024))",
